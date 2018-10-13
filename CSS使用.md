@@ -51,4 +51,47 @@
 如：Vue项目中，app.js引入除默认清理样式外，还引入了部分组件的样式		
        小程序的主文件亦然
 
-### 4.针对CSS的默认属性无需重复声明以及排列顺序
+### 4.CSS的默认属性无需重复声明
+	简化CSS，避免针对已经是block的元素声明block，以及泛用弹性盒
+### 5.排列顺序
+	推荐的样式编写顺序：
+	- Positioning
+	- Box model
+	- Typographic
+	- Visual
+	由于定位（positioning）可以从正常的文档流中移除元素，并且还能覆盖盒模型（box model）相关的样式，因此排在首位。盒模型决定了组件的尺寸和位置，因此排在第二位。
+
+	其他属性只是影响组件的内部（inside）或者是不影响前两组属性，因此排在后面:
+
+``` css?linenums
+.declaration-order {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+
+  /* Box-model */
+  display: block;
+  float: right;
+  width: 100px;
+  height: 100px;
+
+  /* Typography */
+  font: normal 13px "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  color: #333;
+  text-align: center;
+
+  /* Visual */
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+
+  /* Misc */
+  opacity: 1;
+}
+
+```
